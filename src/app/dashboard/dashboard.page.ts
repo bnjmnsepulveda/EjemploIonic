@@ -38,7 +38,7 @@ export class DashboardPage implements OnInit {
         this.loginService.loginCckall(this.nombreUsuario, this.claveUsuario)
         .subscribe(login => {
             if (login) {
-                this.router.navigate(['/contactos']);
+                this.router.navigate(['/home']);
             } else {
                 console.log('LOGIN INCORRECTO!!!');
             }
