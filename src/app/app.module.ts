@@ -1,3 +1,4 @@
+ 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -15,6 +16,7 @@ import { VideoRoomPageModule } from './video-room/video-room.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { ContactosModule } from './contactos/contactos.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -27,6 +29,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
         AppRoutingModule,
         HttpClientModule,
         VideoRoomPageModule,
+        ContactosModule
     ],
     providers: [
         StatusBar,

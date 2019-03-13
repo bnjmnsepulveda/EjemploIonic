@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
-  { path: ':roomName', loadChildren: './video-room/video-room.module#VideoRoomPageModule' },
+  { path: 'room/:roomName', loadChildren: './video-room/video-room.module#VideoRoomPageModule' },
+  { path: 'contactos', loadChildren: './contactos/contactos.module#ContactosModule'  }
 ];
 
 @NgModule({

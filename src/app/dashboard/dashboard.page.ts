@@ -23,4 +23,8 @@ export class DashboardPage implements OnInit {
             }
         }
     }
+
+    contactos(): void {
+        this.router.navigate(['/contactos']);
+    }
 }
