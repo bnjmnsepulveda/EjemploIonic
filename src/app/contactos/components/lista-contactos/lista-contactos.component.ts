@@ -1,5 +1,5 @@
-import { ContactoAgente } from './../../domain/cckall.domain';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ContactoAgente } from '../../../shared/domain/cckall.domain';
 
 @Component({
   selector: 'app-lista-contactos',
