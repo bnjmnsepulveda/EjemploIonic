@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
 })
 export class DashboardPage implements OnInit {
     mySessionId: string;
-    myUserName: string;
+    nombreUsuario: string;
+    claveUsuario: string;
 
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private loginService: LoginService
+    ) {}
 
     ngOnInit() {}
 
@@ -26,5 +31,17 @@ export class DashboardPage implements OnInit {
 
     contactos(): void {
         this.router.navigate(['/contactos']);
+    }
+
+    loginCckall() {
+        console.log('iniciar login usuario ' + this.nombreUsuario + ' clave '+ this.claveUsuario);
+        this.loginService.loginCckall(this.nombreUsuario, this.claveUsuario)
+        .subscribe(login => {
+            if (login) {
+                this.router.navigate(['/contactos']);
+            } else {
+                console.log('LOGIN INCORRECTO!!!');
+            }
+        });
     }
 }

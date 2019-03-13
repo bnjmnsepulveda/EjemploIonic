@@ -11,7 +11,7 @@ import { handleEntidadNoEncontrada } from '../util/funciones-api';
 export class ContactoAgenteService {
 
   // private endpoint: string = api.WEBSERVICE_VIDEOLLAMADAS;
-  private endpoint = 'http://192.168.0.36:5000';
+  private endpoint = 'https://192.168.0.36:5000/api';
 
   constructor(
     private http: HttpClient
