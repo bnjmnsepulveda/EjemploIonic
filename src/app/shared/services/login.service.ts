@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ContactoAgente } from '../../contactos/domain/cckall.domain';
 import { ContactoAgenteService } from '../../contactos/services/contacto-agente.service';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ContactoAgente } from '../domain/cckall.domain';
 
 @Injectable({
   providedIn: 'root'

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactoAgenteService } from '../contactos/services/contacto-agente.service';
 import { LoginService } from '../shared/services/login.service';
-import { ContactoAgente } from '../contactos/domain/cckall.domain';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ContactoAgente } from '../shared/domain/cckall.domain';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
 
   onVideollamadaContacto(contacto: ContactoAgente) {
     console.log('Videollamada con ' + JSON.stringify(contacto));
+    this.router.navigate(['peticion_videollamada']);
   }
 
 }

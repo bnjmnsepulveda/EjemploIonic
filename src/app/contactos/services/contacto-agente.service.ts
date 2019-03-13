@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ContactoAgente } from '../domain/cckall.domain';
 import { catchError } from 'rxjs/operators';
 import { handleEntidadNoEncontrada } from '../util/funciones-api';
+import { ContactoAgente } from '../../shared/domain/cckall.domain';
 
 @Injectable({
   providedIn: 'root'
