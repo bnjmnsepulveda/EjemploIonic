@@ -108,7 +108,7 @@ export class HomePage implements OnInit {
   onVideollamadaContacto(contacto: ContactoAgente) {
     console.log('Videollamada con ' + JSON.stringify(contacto));
 
-    if (this.conectado) {
+   // if (this.conectado) {
       if (this.videollamadaEnProceso) { // si hay una videollamada en proceso no se hace nada.
         console.log('EXISTE UNA VIDEOLLAMADA EN PROCESO!!!');
         return;
@@ -144,13 +144,13 @@ export class HomePage implements OnInit {
         this.videollamadasService.setConversacion(conversacion);
         console.log('> Enviando MensajeWebsocket=' + JSON.stringify(contenido));
         this.websocketService.enviarMensajeWebsocket(TipoMensaje.INICIAR_VIDEO_LLAMADA, contenido);
+        this.router.navigate(['peticion_videollamada']);
       });
 
-    } else {
+   /* } else {
       console.log('Warning', 'No hay conexion establecida con servicio de videollamadas!!!');
-    }
+    }*/
 
-    this.router.navigate(['peticion_videollamada']);
   }
 
   processMensajeWebsocket(mensaje: MensajeWebsocket<any>) {
@@ -166,12 +166,19 @@ export class HomePage implements OnInit {
           this.videollamadasService.settokenVideollamada(mensaje.contenido.token);
           this.videollamadasService.setVideollamadaId(mensaje.contenido.videollamadaId);
           this.videollamadaEnProceso = true;
+          this.conectado = true;
           this.router.navigate(['videollamada/', mensaje.contenido.videollamadaId]);
           break;
         // --- CANCELAR_VIDEOLLAMADA ---
         case TipoMensaje.CANCELAR_LLAMADA:
           this.videollamadaEnProceso = false;
           this.conectado = false;
+        break;
+        // --- TIMEOUT_VIDEOLLAMADA ---
+        case TipoMensaje.TIMEOUT_LLAMADA:
+          this.videollamadaEnProceso = false;
+          this.conectado = false;
+          this.router.navigate(['home']);
         break;
     }
   }

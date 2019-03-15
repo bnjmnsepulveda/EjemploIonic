@@ -5,7 +5,14 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-avatar class="avatar">
+    <img src="/assets/images/agente.svg" >
+  </ion-avatar>
+  <ion-label>
+    <h2>{{conversacionIniciada.titulo}}</h2>
+    <p>{{conversacionIniciada.descripcion}}</p>
+  </ion-label>
+  <ion-progress-bar class="progress-bar" type="indeterminate"></ion-progress-bar>
   <ion-button
     (click)="cancelar()"
     expand="block"
@@ -13,3 +20,14 @@
     color="primary"><ion-icon slot="start" name="videocam"></ion-icon>Cancelar Videollamada</ion-button>
     
 </ion-content>
+
+<style>
+.avatar{
+  margin: 20px auto;
+}
+
+.progress-bar{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+</style>
