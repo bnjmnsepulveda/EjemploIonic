@@ -189,7 +189,12 @@ export class HomePage implements OnInit {
         // --- Un usuario solicita una video llamada ---
         case TipoMensaje.SOLICITUD_VIDEO_LLAMADA:
         this.saliente = false;
-        this.router.navigate(['peticion_videollamada', 'entrante']);
+        const idConversacion = mensaje.contenido.conversacionId;
+        this.conversacionService.readById(idConversacion)
+        .subscribe(conversacion => {
+          this.videollamadasService.setConversacion(conversacion);
+          this.router.navigate(['peticion_videollamada', 'entrante']);
+        });
       break;
     }
   }
