@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError as observableThrowError } from 'rxjs';
+import * as api from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OpenViduService {
 
-  // OPENVIDU_SERVER_URL = 'https://' + location.hostname + ':4443/';
-  OPENVIDU_SERVER_URL = 'https://192.168.0.42:4443/';
+  // OPENVIDU_SERVER_URL = 'https://192.168.0.42:4443/';
+  OPENVIDU_SERVER_URL = api.WEBSERVICE_VIDEOLLAMADAS;
   MY_SECRET = 'BENJAMIN';
 
   constructor(private http: HttpClient) { }

@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable, Observer } from 'rxjs';
 import { MensajeWebsocket, TipoMensaje, ContenidoMensaje } from '../domain/websocket.domain';
 import { map } from 'rxjs/operators';
+import * as api from '../../config/config';
 
 @Injectable({
     providedIn: 'root'
   })
   export class WebsocketService {
 
-    // url = api.WEBSOCKET_VIDEOLLAMADAS;
-    url = 'wss://192.168.0.36:5000/chat';
+    url = api.WEBSOCKET_VIDEOLLAMADAS;
     private subject$: Subject<MessageEvent>;
     private subjectMensajes$: Subject<MensajeWebsocket<any>>;
     private subjectConexion$: Subject<string>;

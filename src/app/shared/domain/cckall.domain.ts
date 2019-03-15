@@ -15,18 +15,10 @@ export interface UsuarioChat {
     rol: string;
 }
 
-export class SesionVideoLLamada {
-    videollamadaId: string;
-    token: string;
-    emisor: ContactoAgente;
-    receptor: ContactoAgente;
-}
-
 export interface UsuarioEscribiendo {
     usuarioId: number;
     texto: string;
 }
-
 
 export interface MensajeChat {
     id?: number;

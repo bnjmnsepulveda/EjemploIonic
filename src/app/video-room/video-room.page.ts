@@ -13,6 +13,7 @@ import { ChatComponent } from '../shared/components/chat/chat.component';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { StreamComponent } from '../shared/components/stream/stream.component';
+import { VideollamadasService } from '../shared/services/videollamadas.service';
 
 @Component({
     selector: 'app-video-room',
@@ -114,6 +115,7 @@ export class VideoRoomPage implements OnInit, OnDestroy {
         public modalController: ModalController,
         private androidPermissions: AndroidPermissions,
         public alertController: AlertController,
+        private videollamdasService: VideollamadasService
     ) {}
 
     @HostListener('window:beforeunload')
@@ -384,6 +386,9 @@ export class VideoRoomPage implements OnInit, OnDestroy {
       }
 
     private connectToSession(): void {
+        this.connect(this.videollamdasService.getTokenVideollamada());
+        // --- CONEXION EJEMPLO ---
+        /*
         this.openViduSrv
             .getToken(this.mySessionId)
             .then((token) => {
@@ -393,6 +398,7 @@ export class VideoRoomPage implements OnInit, OnDestroy {
                 console.error('There was an error getting the token:', error.code, error.message);
                 this.openAlertError(error.message);
             });
+            */
     }
 
     private connect(token: string): void {

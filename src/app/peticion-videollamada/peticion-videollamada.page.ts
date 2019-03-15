@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeticionVideollamadaPage implements OnInit {
 
+  saliente: boolean;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  cancelar() {
+    console.log('cancelando videollamada');
+  }
 }

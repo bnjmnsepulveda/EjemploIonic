@@ -48,8 +48,8 @@ export interface ContenidoMensaje {
 /**
  * Mensaje enviado al crear una videollamada.
  */
-export class MensajeVideoLLamada {
-    videollamadaId: string;
+export interface MensajeVideoLLamada {
+    videollamadaId?: string;
     conversacionId: number;
     emisor: ContactoAgente;
     receptores: ContactoAgente[];
