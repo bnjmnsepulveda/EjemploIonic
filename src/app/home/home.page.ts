@@ -110,6 +110,7 @@ export class HomePage implements OnInit {
 
     if (this.conectado) {
       if (this.videollamadaEnProceso) { // si hay una videollamada en proceso no se hace nada.
+        console.log('EXISTE UNA VIDEOLLAMADA EN PROCESO!!!');
         return;
       }
       const emisor = this.usuario.usuarioChat;
@@ -140,6 +141,7 @@ export class HomePage implements OnInit {
           emisor: this.usuario,
           receptores: receptores
         };
+        this.videollamadasService.setConversacion(conversacion);
         console.log('> Enviando MensajeWebsocket=' + JSON.stringify(contenido));
         this.websocketService.enviarMensajeWebsocket(TipoMensaje.INICIAR_VIDEO_LLAMADA, contenido);
       });
@@ -154,16 +156,23 @@ export class HomePage implements OnInit {
   processMensajeWebsocket(mensaje: MensajeWebsocket<any>) {
     console.log('MENSAJE-SERVER=' + JSON.stringify(mensaje));
     switch (mensaje.tipoMensaje) {
+        // --- VIDEOLLAMADA_ID_ASIGNADO ---
         case TipoMensaje.VIDEOLLAMADA_ID_ASIGNADO:
           this.videollamadasService.setVideollamadaId(mensaje.contenido);
         break;
+        // --- TOKEN_VIDEOLLAMADA ---
         case TipoMensaje.TOKEN_VIDEOLLAMADA:
-        console.log('Contenido recibido: ' + JSON.stringify(mensaje.contenido));
-        this.videollamadasService.settokenVideollamada(mensaje.contenido.token);
-        this.videollamadasService.setVideollamadaId(mensaje.contenido.videollamadaId);
-        this.videollamadasService.setConversacionId(mensaje.contenido.conversacionId);
-        this.videollamadaEnProceso = true;
-        this.router.navigate(['videollamada/', mensaje.contenido.videollamadaId]);
+          console.log('Contenido recibido: ' + JSON.stringify(mensaje.contenido));
+          this.videollamadasService.settokenVideollamada(mensaje.contenido.token);
+          this.videollamadasService.setVideollamadaId(mensaje.contenido.videollamadaId);
+          this.videollamadaEnProceso = true;
+          this.router.navigate(['videollamada/', mensaje.contenido.videollamadaId]);
+          break;
+        // --- CANCELAR_VIDEOLLAMADA ---
+        case TipoMensaje.CANCELAR_LLAMADA:
+          this.videollamadaEnProceso = false;
+          this.conectado = false;
+        break;
     }
   }
 }

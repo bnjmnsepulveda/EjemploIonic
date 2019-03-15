@@ -12,7 +12,6 @@ export class VideollamadasService {
   conversacionIniciada: Conversacion;
   videollmadaId: string;
   tokenVideollamada: string;
-  conversacionId: string;
   // --- objetos openvidu ---
    OV: OpenVidu;
    session: Session;
@@ -123,11 +122,4 @@ export class VideollamadasService {
    return this.tokenVideollamada;
  }
 
- setConversacionId(conversacionId: string) {
-   this.conversacionId = conversacionId;
- }
-
- getConversacionId() {
-   return this.conversacionId;
- }
 }
