@@ -173,6 +173,7 @@ export class HomePage implements OnInit {
         case TipoMensaje.CANCELAR_LLAMADA:
           this.videollamadaEnProceso = false;
           this.conectado = false;
+          this.router.navigate(['home']);
         break;
         // --- TIMEOUT_VIDEOLLAMADA ---
         case TipoMensaje.TIMEOUT_LLAMADA:

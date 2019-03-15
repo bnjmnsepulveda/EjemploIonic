@@ -17,25 +17,18 @@
       color="primary"><ion-icon slot="start" name="videocam"></ion-icon>Cancelar Videollamada</ion-button>
   </ng-template>
   <ng-template #entrante>
+    <div style="width:50%; margin: 0 auto;">
       <ion-fab vertical="center" horizontal="start" slot="fixed">
           <ion-fab-button color="primary" >
             <ion-icon name="videocam"></ion-icon>
           </ion-fab-button>
       </ion-fab>
-      <ion-fab vertical="center" horizontal="start" slot="fixed">
-          <ion-fab-button>
+      <ion-fab vertical="center" horizontal="end" slot="fixed">
+          <ion-fab-button color="secundary">
             <ion-icon name="close"></ion-icon>
           </ion-fab-button>
       </ion-fab>
-      <!--<ion-button
-       expand="block"
-       shape="round"
-       color="primary"><ion-icon slot="start" name="videocam"></ion-icon>Contestar</ion-button>
-      <ion-button
-       expand="block"
-       shape="round"
-       color="secundary"><ion-icon slot="start" name="videocam"></ion-icon>Ignorar</ion-button>
-      -->
+    </div>
   </ng-template>
 </ion-content>
 <style>
