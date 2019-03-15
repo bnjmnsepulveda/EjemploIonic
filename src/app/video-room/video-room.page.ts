@@ -175,7 +175,7 @@ export class VideoRoomPage implements OnInit, OnDestroy {
         this.localUser = null;
         this.OV = null;
         this.openviduLayout = null;
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
     }
 
     resetVideoSize() {
