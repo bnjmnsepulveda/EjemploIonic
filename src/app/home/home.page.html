@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Videollamadas CCKALL</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -32,7 +32,17 @@
               </ion-list>
         </ion-list>
         <ion-list *ngSwitchCase="'tabConversaciones'">
-          <ion-item>Contenido del segmento 2</ion-item>
+            <ion-list *ngFor="let c of conversaciones"> 
+                <ion-item (click)="onSeleccionarConversacion(c)" >
+                  <ion-avatar slot="start">
+                    <img src="/assets/images/grupo.svg" >
+                  </ion-avatar>
+                  <ion-label>
+                    <h3>{{c.titulo}}</h3>
+                    <p>{{c.vistaPrevia}} </p>
+                  </ion-label>                          
+                </ion-item>
+              </ion-list>
         </ion-list>
         <ion-list *ngSwitchCase="'tabSettings'">
           <ion-item>Contenido del segmento 3</ion-item>

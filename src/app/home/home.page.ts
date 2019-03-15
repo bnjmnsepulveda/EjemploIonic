@@ -4,7 +4,7 @@ import { LoginService } from '../shared/services/login.service';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ContactoAgente, Conversacion } from '../shared/domain/cckall.domain';
-import { Subscription, of } from 'rxjs';
+import { Subscription, of, Observable, forkJoin } from 'rxjs';
 import { WebsocketService } from '../shared/services/websocket.service';
 import { TipoMensaje, MensajeWebsocket, MensajeVideoLLamada } from '../shared/domain/websocket.domain';
 import { ConversacionService } from '../shared/services/conversacion.service';
@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   tabId: string;
   usuario: ContactoAgente;
   contactos: ContactoAgente[];
-  // conversaciones: Conversacion[];
+  conversaciones: Conversacion[];
   conectado: boolean;
   videollamadaEnProceso: boolean;
   saliente: boolean;
@@ -76,6 +76,8 @@ export class HomePage implements OnInit {
       this.contactos = contactos;
       this.tabId = 'tabContactos';
     });
+    this.conversacionService.readAll()
+    .subscribe(conversaciones => this.conversaciones = conversaciones);
   }
 
   async onSeleccionarContacto(contacto: ContactoAgente) {
@@ -99,6 +101,50 @@ export class HomePage implements OnInit {
         }]
     });
     await alert.present();
+  }
+
+  async onSeleccionarConversacion(conversacion: Conversacion) {
+    const alert = await this.alertController.create({
+      header: conversacion.titulo,
+      message: conversacion.descripcion,
+      buttons: [
+        {
+          text: 'Chat',
+          role: 'accept',
+          handler: () => {
+            // this.onChatContacto(conversacion);
+          }
+        },
+        {
+          text: 'VideoLLamada',
+          role: 'accept',
+          handler: () => {
+            this.iniciarConversacion(conversacion);
+          }
+        }]
+    });
+    await alert.present();
+  }
+
+  iniciarConversacion(conversacion: Conversacion) {
+     // --- variables de inicio de videollamada ---
+     this.saliente = true; // <----------------- indica que yo estoy llamando
+     this.videollamadaEnProceso = true; // <---- Indica que hay una videollamada ejecutandose (No debe entrar o salir ninguna)
+     // --- FIN variables videollamadas ---
+     const receptores$: Observable<ContactoAgente>[] = [];
+     conversacion.participantes.forEach(p => receptores$.push(this.contactosService.readByUsuarioId(p.id)));
+     forkJoin(receptores$)
+     .subscribe( receptores => {
+       // ### Crear MensajeWebsocket INICIAR_VIDEO_LLAMADA ###
+       const contenido: MensajeVideoLLamada = {
+        emisor: this.usuario,
+        conversacionId: conversacion.id,
+        receptores: receptores
+       };
+       console.log('> Enviando MensajeWebsocket=' + JSON.stringify(contenido));
+       this.videollamadasService.setMensajeVideollamada(contenido);
+       this.websocketService.enviarMensajeWebsocket(TipoMensaje.INICIAR_VIDEO_LLAMADA, contenido);
+      });
   }
 
   onChatContacto(contacto: ContactoAgente) {
