@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'videollamada/:roomName', loadChildren: './video-room/video-room.module#VideoRoomPageModule' },
   { path: 'contactos', loadChildren: './contactos/contactos.module#ContactosModule'  },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
-  { path: 'peticion_videollamada', loadChildren: './peticion-videollamada/peticion-videollamada.module#PeticionVideollamadaPageModule' }
+  { path: 'peticion_videollamada/:tipo',
+  loadChildren: './peticion-videollamada/peticion-videollamada.module#PeticionVideollamadaPageModule' }
 ];
 
 @NgModule({

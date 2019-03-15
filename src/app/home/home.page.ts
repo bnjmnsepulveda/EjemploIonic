@@ -144,7 +144,7 @@ export class HomePage implements OnInit {
         this.videollamadasService.setConversacion(conversacion);
         console.log('> Enviando MensajeWebsocket=' + JSON.stringify(contenido));
         this.websocketService.enviarMensajeWebsocket(TipoMensaje.INICIAR_VIDEO_LLAMADA, contenido);
-        this.router.navigate(['peticion_videollamada']);
+        this.router.navigate(['peticion_videollamada', 'saliente']);
       });
 
    /* } else {
@@ -180,6 +180,17 @@ export class HomePage implements OnInit {
           this.conectado = false;
           this.router.navigate(['home']);
         break;
+        // --- RECHAZAR_VIDEOLLAMADA ---
+        case TipoMensaje.RECHAZAR_VIDEOLLAMADA: 
+          this.videollamadaEnProceso = false;
+          this.conectado = false;
+          this.router.navigate(['home']);
+        break;
+        // --- Un usuario solicita una video llamada ---
+        case TipoMensaje.SOLICITUD_VIDEO_LLAMADA:
+        this.saliente = false;
+        this.router.navigate(['peticion_videollamada', 'entrante']);
+      break;
     }
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from '../shared/services/websocket.service';
 import { TipoMensaje } from '../shared/domain/websocket.domain';
 import { VideollamadasService } from '../shared/services/videollamadas.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Conversacion } from '../shared/domain/cckall.domain';
 
 @Component({
@@ -12,16 +12,21 @@ import { Conversacion } from '../shared/domain/cckall.domain';
 })
 export class PeticionVideollamadaPage implements OnInit {
 
-  saliente: boolean;
+  tipoLlamada: string;
   conversacionIniciada: Conversacion;
 
   constructor(
     private websocketService: WebsocketService,
     private videollamadaService: VideollamadasService,
-    private router: Router
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.activeRoute.params
+    .subscribe((params: Params) => {
+      this.tipoLlamada = params.tipo;
+    });
     this.conversacionIniciada = this.videollamadaService.getConversacion();
   }
 
