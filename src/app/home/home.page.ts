@@ -194,6 +194,7 @@ export class HomePage implements OnInit {
         this.conversacionService.readById(idConversacion)
         .subscribe(conversacion => {
           this.videollamadasService.setConversacion(conversacion);
+          this.videollamadasService.setMensajeVideollamada(mensaje.contenido);
           this.router.navigate(['peticion_videollamada', 'entrante']);
         });
       break;

@@ -2,6 +2,7 @@ import { Injectable, HostListener } from '@angular/core';
 import { ContactoAgente, Conversacion } from '../domain/cckall.domain';
 import { OpenVidu, Session, StreamManager, Publisher, StreamEvent, PublisherProperties, Stream, Subscriber } from 'openvidu-browser';
 import { Subject, Observable } from 'rxjs';
+import { MensajeVideoLLamada } from '../domain/websocket.domain';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class VideollamadasService {
   // --- objetos de sesion de usuario ---
   usuarioApp: ContactoAgente;
   conversacionIniciada: Conversacion;
+  mensajeVideollamada: MensajeVideoLLamada;
   videollmadaId: string;
   tokenVideollamada: string;
   // --- objetos openvidu ---
@@ -122,4 +124,11 @@ export class VideollamadasService {
    return this.tokenVideollamada;
  }
 
+ setMensajeVideollamada(mensajeVideollamada: MensajeVideoLLamada) {
+   this.mensajeVideollamada = mensajeVideollamada;
+ }
+
+ getMensajeVideollamada() {
+   return this.mensajeVideollamada;
+ }
 }

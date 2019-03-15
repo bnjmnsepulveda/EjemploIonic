@@ -19,12 +19,12 @@
   <ng-template #entrante>
     <div style="width:50%; margin: 0 auto;">
       <ion-fab vertical="center" horizontal="start" slot="fixed">
-          <ion-fab-button color="primary" >
+          <ion-fab-button (click)="aceptar()" color="primary" >
             <ion-icon name="videocam"></ion-icon>
           </ion-fab-button>
       </ion-fab>
       <ion-fab vertical="center" horizontal="end" slot="fixed">
-          <ion-fab-button color="secundary">
+          <ion-fab-button (click)="rechazar()" color="secundary">
             <ion-icon name="close"></ion-icon>
           </ion-fab-button>
       </ion-fab>
