@@ -257,4 +257,5 @@ export class HomePage implements OnInit {
       this.titulo = 'Configuración';
     }
   }
+
 }
