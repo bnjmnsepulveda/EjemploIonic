@@ -30,6 +30,9 @@
                   </ion-label>                          
                 </ion-item>
               </ion-list>
+              <ion-item *ngIf="!contactos || (contactos && contactos.length === 0)">
+                  <h3>No hay Contactos</h3>
+              </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'tabConversaciones'">
             <ion-list *ngFor="let c of conversaciones"> 
