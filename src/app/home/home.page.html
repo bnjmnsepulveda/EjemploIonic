@@ -43,6 +43,9 @@
                   </ion-label>                          
                 </ion-item>
               </ion-list>
+              <ion-item *ngIf="!conversaciones || (conversaciones && conversaciones.length === 0)">
+                <h3>No hay Conversaciones</h3>
+              </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'tabSettings'">
           <ion-item>Contenido del segmento 3</ion-item>
