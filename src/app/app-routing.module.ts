@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'contactos', loadChildren: './contactos/contactos.module#ContactosModule'  },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'peticion_videollamada/:tipo',
-  loadChildren: './peticion-videollamada/peticion-videollamada.module#PeticionVideollamadaPageModule' }
+  loadChildren: './peticion-videollamada/peticion-videollamada.module#PeticionVideollamadaPageModule' },
+  { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' }
 ];
 
 @NgModule({
