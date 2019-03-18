@@ -9,6 +9,7 @@
   <ion-progress-bar class="progress-bar" type="indeterminate"></ion-progress-bar>
 
   <ng-container *ngIf="tipoLlamada === 'saliente' then saliante; else entrante" ></ng-container>
+
   <ng-template #saliante >
     <ion-button
       (click)="cancelar()"
@@ -16,6 +17,7 @@
       shape="round"
       color="primary"><ion-icon slot="start" name="videocam"></ion-icon>Cancelar Videollamada</ion-button>
   </ng-template>
+
   <ng-template #entrante>
     <div style="width:50%; margin: 0 auto;">
       <ion-fab vertical="center" horizontal="start" slot="fixed">
@@ -29,10 +31,13 @@
           </ion-fab-button>
       </ion-fab>
     </div>
-    <audio src="assets/audio/ringtone3.mp3" autoplay loop >
-      <p>Error reproduciendo audio</p>
-    </audio>
   </ng-template>
+
+  <!-- Control de audio (Manipulacion del DOM mediante en identificador #audioControl )-->
+  <audio #audioControl src="assets/audio/ringtone3.mp3" loop >
+    <p>Error reproduciendo audio</p>
+  </audio>
+  
 </ion-content>
 <style>
 .avatar{

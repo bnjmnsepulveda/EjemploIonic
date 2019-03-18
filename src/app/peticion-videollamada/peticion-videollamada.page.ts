@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { WebsocketService } from '../shared/services/websocket.service';
 import { TipoMensaje } from '../shared/domain/websocket.domain';
 import { VideollamadasService } from '../shared/services/videollamadas.service';
@@ -15,19 +15,23 @@ export class PeticionVideollamadaPage implements OnInit {
 
   tipoLlamada: string;
   conversacionIniciada: Conversacion;
+  @ViewChild('audioControl')
+  audioEl: ElementRef;
 
   constructor(
     private websocketService: WebsocketService,
     private videollamadaService: VideollamadasService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit() {
     this.activeRoute.params
     .subscribe((params: Params) => {
       this.tipoLlamada = params.tipo;
+      this.playRingtone();
     });
     this.conversacionIniciada = this.videollamadaService.getConversacion();
   }
@@ -51,6 +55,7 @@ export class PeticionVideollamadaPage implements OnInit {
         participanteActivo: this.loginService.getUsuario()
       };
     this.websocketService.enviarMensajeWebsocket(TipoMensaje.CONTESTAR_LLAMADA, contenido);
+    this.stopRingtone();
   }
 
   rechazar() {
@@ -61,5 +66,18 @@ export class PeticionVideollamadaPage implements OnInit {
       notificarContactos: participantes
     };
     this.websocketService.enviarMensajeWebsocket(TipoMensaje.RECHAZAR_VIDEOLLAMADA, contenido);
+    this.stopRingtone();
+  }
+
+  private playRingtone() {
+    if (this.tipoLlamada === 'entrante') {
+      this.renderer.selectRootElement(this.audioEl.nativeElement).play();
+    }
+  }
+
+  private stopRingtone() {
+    if (this.tipoLlamada === 'entrante') {
+      this.renderer.selectRootElement(this.audioEl.nativeElement).pause();
+    }
   }
 }
