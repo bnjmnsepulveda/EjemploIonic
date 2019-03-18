@@ -253,12 +253,12 @@ export class HomePage implements OnInit {
         break;
         // --- actualizacion de conversaciones ---
         case TipoMensaje.ACTUALIZAR_CONVERSACIONES:
-          const conversacion: Conversacion = mensaje.contenido;
+          const conversacionNueva: Conversacion = mensaje.contenido;
           console.log('Notificacion conversacion creada = ' + JSON.stringify(mensaje.contenido));
-          conversacion.vistaPrevia = this.crearVistaPreviaMensajes(conversacion);
-          conversacion.mensajes = [];
-          if (conversacion.participantes.length > 2) {
-            this.conversaciones.push(conversacion);
+          conversacionNueva.vistaPrevia = this.crearVistaPreviaMensajes(conversacionNueva);
+          conversacionNueva.mensajes = [];
+          if (conversacionNueva.participantes.length > 2) {
+            this.conversaciones.push(conversacionNueva);
           }
         break;
     }
