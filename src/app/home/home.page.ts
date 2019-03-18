@@ -251,6 +251,16 @@ export class HomePage implements OnInit {
         case TipoMensaje.ACTUALIZAR_CONTACTOS:
           this.contactos$.subscribe(contactos => this.contactos = contactos);
         break;
+        // --- actualizacion de conversaciones ---
+        case TipoMensaje.ACTUALIZAR_CONVERSACIONES:
+          const conversacion: Conversacion = mensaje.contenido;
+          console.log('Notificacion conversacion creada = ' + JSON.stringify(mensaje.contenido));
+          conversacion.vistaPrevia = this.crearVistaPreviaMensajes(conversacion);
+          conversacion.mensajes = [];
+          if (conversacion.participantes.length > 2) {
+            this.conversaciones.push(conversacion);
+          }
+        break;
     }
   }
 
@@ -270,6 +280,21 @@ export class HomePage implements OnInit {
   logout() {
     this.loginService.logoutCckall();
     this.router.navigate(['']);
+  }
+
+  crearVistaPreviaMensajes(conversacion: Conversacion): string {
+    // console.log('crenado vista previa mensaje');
+    if (conversacion.mensajes === undefined) {
+      return 'No hay mensajes en esta conversación :(';
+    }
+    if (conversacion.mensajes === null) {
+      return 'No hay mensajes en esta conversación :(';
+    }
+    if (conversacion.mensajes.length === 0) {
+      return 'No hay mensajes en esta conversación :(';
+    }
+    const msg = conversacion.mensajes[conversacion.mensajes.length - 1];
+    return msg.contenido;
   }
 
 }
