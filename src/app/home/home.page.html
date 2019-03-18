@@ -27,7 +27,10 @@
                   <ion-label>
                     <h3>Agente</h3>
                     <p>{{c.nombre}} {{c.apellido}}</p>
-                  </ion-label>                          
+                  </ion-label> 
+                  <div class="circulo-estado" [ngStyle]="{
+                    'background-color': c.enLinea ? 'green' : 'red'
+                  }"></div>                         
                 </ion-item>
               </ion-list>
               <ion-item *ngIf="!contactos || (contactos && contactos.length === 0)">
@@ -42,7 +45,7 @@
                   </ion-avatar>
                   <ion-label>
                     <h3>{{c.titulo}}</h3>
-                    <p>{{c.vistaPrevia}} </p>
+                    <p>{{c.vistaPrevia}}</p>
                   </ion-label>                          
                 </ion-item>
               </ion-list>
@@ -81,5 +84,9 @@
 .btn-logout{
   width: 100%;
 }
-
+.circulo-estado{
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+}
 </style>

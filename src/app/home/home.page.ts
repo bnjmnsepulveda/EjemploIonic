@@ -248,6 +248,9 @@ export class HomePage implements OnInit {
     }
   }
 
+  /**
+   * Cambia el subtitulo de las pestañas de la aplicacion.
+   */
   segmentChanged(event) {
     if (event.detail.value === 'tabContactos') {
       this.titulo = 'Contactos';
