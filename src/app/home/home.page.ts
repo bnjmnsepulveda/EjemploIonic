@@ -1,3 +1,4 @@
+import { AppModule } from './../app.module';
 import { Component, OnInit } from '@angular/core';
 import { ContactoAgenteService } from '../contactos/services/contacto-agente.service';
 import { LoginService } from '../shared/services/login.service';
@@ -82,24 +83,24 @@ export class HomePage implements OnInit {
   }
 
   async onSeleccionarContacto(contacto: ContactoAgente) {
+    const btnChat = {
+      text: 'Chat',
+      role: 'accept',
+      handler: () => {
+        this.onChatContacto(contacto);
+      }
+    };
+    const btnVideollamada = {
+      text: 'VideoLLamada',
+      role: 'accept',
+      handler: () => {
+        this.onVideollamadaContacto(contacto);
+      }
+    };
     const alert = await this.alertController.create({
       header: contacto.nombre,
       message: 'Comunicarse con ' + contacto.nombre,
-      buttons: [
-        {
-          text: 'Chat',
-          role: 'accept',
-          handler: () => {
-            this.onChatContacto(contacto);
-          }
-        },
-        {
-          text: 'VideoLLamada',
-          role: 'accept',
-          handler: () => {
-            this.onVideollamadaContacto(contacto);
-          }
-        }]
+      buttons: contacto.enLinea ? [ btnVideollamada, btnChat ] : [ btnChat ]
     });
     await alert.present();
   }
@@ -154,7 +155,6 @@ export class HomePage implements OnInit {
 
   onVideollamadaContacto(contacto: ContactoAgente) {
     console.log('Videollamada con ' + JSON.stringify(contacto));
-
    // if (this.conectado) {
       if (this.videollamadaEnProceso) { // si hay una videollamada en proceso no se hace nada.
         console.log('EXISTE UNA VIDEOLLAMADA EN PROCESO!!!');
