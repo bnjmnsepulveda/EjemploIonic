@@ -1,20 +1,20 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Videollamadas CCKALL</ion-title>
+    <ion-title class="toolbar">Videollamadas CCKALL</ion-title>
+    <ion-title class="subtitulo">{{titulo}}</ion-title>
+    <ion-segment [(ngModel)]="tabId" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="tabContactos">
+          <ion-icon name="contact"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="tabConversaciones">
+          <ion-icon name="chatbubbles"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="tabSettings">
+          <ion-icon name="settings"></ion-icon>
+        </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
-
-<ion-segment [(ngModel)]="tabId">
-    <ion-segment-button value="tabContactos">
-      <ion-icon name="contact"></ion-icon>
-    </ion-segment-button>
-    <ion-segment-button value="tabConversaciones">
-      <ion-icon name="chatbubbles"></ion-icon>
-    </ion-segment-button>
-    <ion-segment-button value="tabSettings">
-      <ion-icon name="settings"></ion-icon>
-    </ion-segment-button>
-</ion-segment>
 
 <ion-content padding>
     <div [ngSwitch]="tabId">
@@ -50,6 +50,14 @@
     </div>
 </ion-content>
 <style>
+.toolbar{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.subtitulo{
+  font-size: 14px;
+  margin-bottom: 15px;
+}
 .nombre-contacto{
   font-size: 12px;
 }

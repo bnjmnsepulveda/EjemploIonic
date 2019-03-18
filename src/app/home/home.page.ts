@@ -18,6 +18,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
+  titulo: string;
   tabId: string;
   usuario: ContactoAgente;
   contactos: ContactoAgente[];
@@ -244,6 +245,16 @@ export class HomePage implements OnInit {
           this.router.navigate(['peticion_videollamada', 'entrante']);
         });
       break;
+    }
+  }
+
+  segmentChanged(event) {
+    if (event.detail.value === 'tabContactos') {
+      this.titulo = 'Contactos';
+    } else if (event.detail.value === 'tabConversaciones') {
+      this.titulo = 'Conversaciones';
+    } else if (event.detail.value === 'tabSettings') {
+      this.titulo = 'Configuración';
     }
   }
 }
