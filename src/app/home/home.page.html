@@ -51,7 +51,18 @@
               </ion-item>
         </ion-list>
         <ion-list *ngSwitchCase="'tabSettings'">
-          <ion-item>Contenido del segmento 3</ion-item>
+          <ion-item>
+            <ion-button
+            class="btn-logout"
+            (click)="logout()"
+            expand="block"
+            shape="round"
+            color="primary"
+          >
+              <ion-icon slot="start" name="person"></ion-icon>
+              Cerrar Sesión
+            </ion-button>
+          </ion-item>
         </ion-list>
     </div>
 </ion-content>
@@ -67,8 +78,8 @@
 .nombre-contacto{
   font-size: 12px;
 }
-
-.icono-btn{
-  cursor: pointer;
+.btn-logout{
+  width: 100%;
 }
+
 </style>

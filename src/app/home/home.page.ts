@@ -258,4 +258,9 @@ export class HomePage implements OnInit {
     }
   }
 
+  logout() {
+    this.loginService.logoutCckall();
+    this.router.navigate(['']);
+  }
+
 }
