@@ -30,6 +30,11 @@ export class HomePage implements OnInit {
    // --- subscripcion de mensajes ws ---
    subscripcionConexionWebsocket: Subscription;
    subscripcionMensajes: Subscription;
+   contactos$ = this.contactosService
+   .readAll()
+   .pipe(
+     map( contactos => contactos.filter(c => c.id !== this.loginService.getUsuario().id))
+   );
 
   constructor(
     private contactosService: ContactoAgenteService,
@@ -70,10 +75,7 @@ export class HomePage implements OnInit {
         this.router.navigate(['/']);
         // this.notificacionService.errorNotify('Se ha cerrado la conexion a servidor');
     });
-    this.contactosService.readAll()
-    .pipe(
-      map( contactos => contactos.filter(c => c.id !== this.loginService.getUsuario().id))
-    )
+    this.contactos$
     .subscribe(contactos => {
       this.contactos = contactos;
       this.tabId = 'tabContactos';
@@ -244,7 +246,11 @@ export class HomePage implements OnInit {
           this.videollamadasService.setMensajeVideollamada(mensaje.contenido);
           this.router.navigate(['peticion_videollamada', 'entrante']);
         });
-      break;
+        break;
+        // --- Actualizacion de contactos ---
+        case TipoMensaje.ACTUALIZAR_CONTACTOS:
+          this.contactos$.subscribe(contactos => this.contactos = contactos);
+        break;
     }
   }
 

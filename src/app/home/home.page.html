@@ -29,7 +29,7 @@
                     <p>{{c.nombre}} {{c.apellido}}</p>
                   </ion-label> 
                   <div class="circulo-estado" [ngStyle]="{
-                    'background-color': c.enLinea ? 'green' : 'red'
+                    'background-color': c.enLinea ? '#5cb85c' : '#b04e29'
                   }"></div>                         
                 </ion-item>
               </ion-list>
@@ -85,8 +85,8 @@
   width: 100%;
 }
 .circulo-estado{
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
 }
 </style>
