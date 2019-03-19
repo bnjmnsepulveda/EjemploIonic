@@ -1,4 +1,5 @@
 <ng-template [ngIf]="conversacion">
+  <!-- HEADER -->
   <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="primary">
@@ -14,8 +15,8 @@
       <ion-title>{{ conversacion.titulo }}</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-content padding class="contenido-mensajes">
+  <!-- CONTENT MAIN -->
+  <ion-content #content padding class="contenido-mensajes">
     <ng-template [ngIf]="conversacion.mensajes" >
         <app-mensaje *ngFor="let m of conversacion.mensajes"
         [usuario]="usuario"
@@ -24,6 +25,7 @@
         ></app-mensaje>
     </ng-template>   
   </ion-content>
+  <!-- FOOTER <<-->
   <ion-footer>
     <app-barra-mensaje
     (toggleFabList)="onToogleFabList()"
@@ -31,10 +33,5 @@
     (inicioEscribiendo)="onInicioEscribiendo($event)"
     (finEscribiendo)="onFinEscribiendo($event)"></app-barra-mensaje>
   </ion-footer>
-</ng-template>
-<style>
-  .contenido-mensajes {
-    background-image: url("/assets/images/fondo_chat.jpg");
-  }
 
-</style>
+</ng-template>

@@ -1,3 +1,4 @@
+import { ChatService } from './../shared/services/chat.service';
 import { AppModule } from './../app.module';
 import { Component, OnInit } from '@angular/core';
 import { ContactoAgenteService } from '../contactos/services/contacto-agente.service';
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 import { ContactoAgente, Conversacion } from '../shared/domain/cckall.domain';
 import { Subscription, of, Observable, forkJoin } from 'rxjs';
 import { WebsocketService } from '../shared/services/websocket.service';
-import { TipoMensaje, MensajeWebsocket, MensajeVideoLLamada } from '../shared/domain/websocket.domain';
+import { TipoMensaje, MensajeWebsocket, MensajeVideoLLamada, MensajeNuevoMensajeChat } from '../shared/domain/websocket.domain';
 import { ConversacionService } from '../shared/services/conversacion.service';
 import { VideollamadasService } from '../shared/services/videollamadas.service';
 import { AlertController } from '@ionic/angular';
@@ -44,7 +45,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private websocketService: WebsocketService,
     private videollamadasService: VideollamadasService,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private chatService: ChatService
   ) { }
 
   ngOnInit() {
@@ -293,6 +295,31 @@ export class HomePage implements OnInit {
             this.conversaciones.push(conversacionNueva);
           }
         break;
+        // --- recepcion de nuevo mensaje de chat ---
+        case TipoMensaje.MENSAJE_CHAT:
+        const nuevoMensaje: MensajeNuevoMensajeChat = mensaje.contenido;
+        this.chatService.nuevoMensaje(nuevoMensaje);
+        // --- validar usuario distino de app para notificar msg ---
+        if (nuevoMensaje.mensajeChat.emisor.id !== this.usuario.usuarioChat.id) {
+          // this.notificacionService.successNotify('Nuevo mensaje: ' + nuevoMensaje.mensajeChat.contenido);
+          console.log('IMPLEEMNTAR NOTIFICACION!!!!');
+        }
+        let conversacionEnLista = false;
+        for (let x = 0; x < this.conversaciones.length; x++) {
+          if (this.conversaciones[x].id === nuevoMensaje.conversacionId) {
+            this.conversaciones[x].vistaPrevia = nuevoMensaje.mensajeChat.contenido;
+            conversacionEnLista = true;
+            break;
+          }
+        }
+        if (!conversacionEnLista) {
+          this.conversacionService.readById(nuevoMensaje.conversacionId)
+          .subscribe(conv => {
+            conv.vistaPrevia = this.crearVistaPreviaMensajes(conv);
+            this.conversaciones.push(conv);
+          });
+        break;
+      }
     }
   }
 

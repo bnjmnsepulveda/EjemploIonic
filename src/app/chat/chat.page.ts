@@ -1,6 +1,6 @@
 import { ChatService } from './../shared/services/chat.service';
 import { LoginService } from './../shared/services/login.service';
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { UsuarioChat, Conversacion, UsuarioEscribiendo, MensajeChat } from '../shared/domain/cckall.domain';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -18,19 +18,20 @@ export class ChatPage implements OnInit {
   conversacion: Conversacion;
 
   mensajesSegundoPlano: boolean;
+  mensajes$: Subscription;
 
   @Input()
   usuariosEscribiendo: UsuarioEscribiendo[];
-  @Output()
-  enviarMensaje = new EventEmitter<MensajeChat>();
-  @Output()
-  escribiendo = new EventEmitter<string>();
-  @Output()
-  inicioEscribiendo = new EventEmitter<string>();
-  @Output()
-  finEscribiendo = new EventEmitter<string>();
-  @ViewChild('scrollMensajes') scroll: ElementRef;
+
+  /**
+   * Contenido para poder realizar operaciones como scroll.
+   */
+  @ViewChild('content')
+  content: any;
+
   mensajes: Subscription;
+
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -50,6 +51,18 @@ export class ChatPage implements OnInit {
     ).subscribe(conversacion => this.conversacion = conversacion);
     // --- mensajes en segundo plano de chat no se mostraran con opacidad
     this.mensajesSegundoPlano = false;
+    // ---  observable mensajes ---
+    this.mensajes$ = this.chatService.getMensajesChat()
+    .subscribe(msg => {
+      if (this.conversacion.id === msg.conversacionId) {
+        console.log('se actualizara vista mensajes');
+        if (this.conversacion.mensajes === null ) {
+          this.conversacion.mensajes = [];
+        }
+        this.conversacion.mensajes.push(msg.mensajeChat);
+        this.content.scrollToBottom();
+      }
+    });
   }
   /**
    * agrega opacidad a mensajes de chat cuando se abre la lista de botones fab con acciones de chat.

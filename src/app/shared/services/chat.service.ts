@@ -24,7 +24,7 @@ export class ChatService {
   mensajeNuevo$: Subject<MensajeNuevoMensajeChat> = new Subject();
   usuarioInicioEscribiendo: Subject<UsuarioEscribiendo> = new Subject();
   usuarioFinEscribiendo: Subject<UsuarioEscribiendo> = new Subject();
-  
+
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
