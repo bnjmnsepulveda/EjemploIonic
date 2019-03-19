@@ -1,3 +1,4 @@
+import { LoginService } from './../shared/services/login.service';
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { UsuarioChat, Conversacion, UsuarioEscribiendo, MensajeChat } from '../shared/domain/cckall.domain';
 import { Subscription } from 'rxjs';
@@ -12,10 +13,9 @@ import { ConversacionService } from '../shared/services/conversacion.service';
 })
 export class ChatPage implements OnInit {
 
-  @Input()
   usuario: UsuarioChat;
-  @Input()
   conversacion: Conversacion;
+
   @Input()
   usuariosEscribiendo: UsuarioEscribiendo[];
   @Output()
@@ -31,10 +31,12 @@ export class ChatPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private conversacionService: ConversacionService
+    private conversacionService: ConversacionService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
+    this.usuario = this.loginService.getUsuario().usuarioChat;
     this.activatedRoute.params
     .pipe(
       switchMap((params: Params) => {

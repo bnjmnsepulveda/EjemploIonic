@@ -11,11 +11,16 @@
           <ion-icon slot="icon-only" name="close"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>{{ conversacion.titulo }} - CHAT</ion-title>
+      <ion-title>{{ conversacion.titulo }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content padding class="contenido-mensajes">
+    <ng-template [ngIf]="conversacion.mensajes" >
+        <app-mensaje *ngFor="let m of conversacion.mensajes"
+        [usuario]="usuario"
+        [mensaje]="m"></app-mensaje>
+    </ng-template>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
       <ion-fab-button>
         <ion-icon name="paper-plane"></ion-icon>

@@ -1,5 +1,5 @@
 <div class="contenedor-mensaje {{cssMensaje}}">
-    <img src="/assets/img/agente.svg" width="50" class="avatar-mensaje" />
+    <img src="/assets/images/agente.svg" width="50" class="avatar-mensaje" />
     <div class="globo-mensaje">
       <p class="nombre-usuario">{{ mensaje.emisor.username }}</p>
       <span class="contenido-mensaje">{{ mensaje.contenido }}</span>
@@ -24,6 +24,10 @@
       border-radius: 10px;
       box-sizing: border-box;
     }
+
+    .nombre-usuario{
+      margin: 0px;
+    }
   
     .contenido-mensaje{
       font-size: 12px;
@@ -33,6 +37,7 @@
       font-size: 11px;
       text-align: end;
       color: grey;
+      margin: 5px;
     }
     .globo-mensaje .nombre-usuario {
       font-weight: bold;
