@@ -1,10 +1,10 @@
 <div class="contenedor-barra-mensajes">
     <ion-fab vertical="top" horizontal="end" slot="fixed" edge="true">
-        <ion-fab-button (click)="onToggleFabList()" >
+        <ion-fab-button (click)="onToggleFabList()">
           <ion-icon name="paper-plane"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="top">
-          <ion-fab-button (click)="onEnviarMensaje()">
+          <ion-fab-button (click)="onEnviarMensaje()" [disabled]="textoMensaje.length === 0" >
             <ion-icon name="send"></ion-icon>
           </ion-fab-button>
           <ion-fab-button>
