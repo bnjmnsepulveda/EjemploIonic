@@ -1,3 +1,4 @@
+import { ChatService } from './../shared/services/chat.service';
 import { LoginService } from './../shared/services/login.service';
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { UsuarioChat, Conversacion, UsuarioEscribiendo, MensajeChat } from '../shared/domain/cckall.domain';
@@ -34,7 +35,8 @@ export class ChatPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private conversacionService: ConversacionService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private chatService: ChatService
   ) { }
 
   ngOnInit() {
@@ -53,12 +55,17 @@ export class ChatPage implements OnInit {
    * agrega opacidad a mensajes de chat cuando se abre la lista de botones fab con acciones de chat.
   */
   onToogleFabList() {
-    console.log('SE ABRIO BTON LIST FAB');
     this.mensajesSegundoPlano = !this.mensajesSegundoPlano;
   }
 
   onEnviarMensaje(text: string): void {
-    console.log('XD MENSAJE A ENVIAR=' + text);
+    console.log('enviar mensaje desde android:' + text);
+    const mensaje: MensajeChat = {
+      emisor: this.usuario,
+      fecha: new Date(),
+      contenido: text
+    };
+    this.chatService.enviarMensaje(this.conversacion.id, mensaje).subscribe();
   }
 
   onInicioEscribiendo(text: string) {

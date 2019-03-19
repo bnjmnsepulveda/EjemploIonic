@@ -49,6 +49,7 @@ export class BarraMensajeComponent implements OnInit {
     if (this.textoMensaje.length > 0) {
       this.enviarMensaje.emit(this.textoMensaje);
       this.textoMensaje = '';
+      this.onToggleFabList();
     }
   }
 
@@ -65,9 +66,17 @@ export class BarraMensajeComponent implements OnInit {
     this.subjectFinEscribiendo.next(this.textoMensaje);
   }
 
-  onAdjuntar() {}
+  onAdjuntar() {
+    this.onToggleFabList();
+  }
 
-  onPregrabados() {}
+  onPregrabados() {
+    this.onToggleFabList();
+  }
+
+  onCompartirContacto() {
+    this.onToggleFabList();
+  }
 
   /**
    * Crea la suscripcion al evento de inicio de escribiendo cuando sea necesario.
