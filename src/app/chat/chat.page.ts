@@ -69,11 +69,11 @@ export class ChatPage implements OnInit {
   }
 
   onInicioEscribiendo(text: string) {
-    console.log('INICIO ESCR=' + text);
+    this.chatService.enviarInicioEscribiendo(this.conversacion.id, this.usuario.id).subscribe();
   }
 
   onFinEscribiendo(text: string) {
-    console.log('FIN ESCR=' + text);
+    this.chatService.enviarFinEscribiendo(this.conversacion.id, this.usuario.id).subscribe();
   }
 
 }
