@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { UsuarioChat, Conversacion, UsuarioEscribiendo, MensajeChat } from '../shared/domain/cckall.domain';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
+import { switchMap, tap } from 'rxjs/operators';
+import { ConversacionService } from '../shared/services/conversacion.service';
 
 @Component({
   selector: 'app-chat',
@@ -26,9 +29,19 @@ export class ChatPage implements OnInit {
   @ViewChild('scrollMensajes') scroll: ElementRef;
   mensajes: Subscription;
 
-  constructor() { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private conversacionService: ConversacionService
+  ) { }
 
   ngOnInit() {
+    this.activatedRoute.params
+    .pipe(
+      switchMap((params: Params) => {
+        return this.conversacionService.readById(params.conversacionId);
+      }),
+      tap(conversacion => console.log('Chat asociado a conversacion ' + JSON.stringify(conversacion)))
+    ).subscribe(conversacion => this.conversacion = conversacion);
   }
 
 }

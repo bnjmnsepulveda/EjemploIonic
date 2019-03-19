@@ -1,41 +1,42 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="primary">
-      <ion-button color="light">
-        <ion-icon slot="icon-only" name="videocam"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button color="light">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Nombre - CHAT</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ng-template [ngIf]="conversacion">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="primary">
+        <ion-button color="light">
+          <ion-icon slot="icon-only" name="videocam"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="primary">
+        <ion-button color="light">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{ conversacion.titulo }} - CHAT</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content padding class="contenido-mensajes">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
-    <ion-fab-button>
-      <ion-icon name="paper-plane"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
+  <ion-content padding class="contenido-mensajes">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
       <ion-fab-button>
-        <ion-icon name="send"></ion-icon>
+        <ion-icon name="paper-plane"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="images"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="person"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
-</ion-content>
-<ion-footer>
-  <app-barra-mensaje></app-barra-mensaje>
-</ion-footer>
-
+      <ion-fab-list side="top">
+        <ion-fab-button>
+          <ion-icon name="send"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="images"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="person"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </ion-content>
+  <ion-footer>
+    <app-barra-mensaje></app-barra-mensaje>
+  </ion-footer>
+</ng-template>
 <style>
   .contenido-mensajes {
     background-image: url("/assets/images/fondo_chat.jpg");
