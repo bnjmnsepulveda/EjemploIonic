@@ -12,6 +12,8 @@ export class MensajeComponent implements OnInit {
   usuario: UsuarioChat;
   @Input()
   mensaje: MensajeChat;
+  @Input()
+  segundoPlano: string;
   cssMensaje: string;
 
   constructor() { }

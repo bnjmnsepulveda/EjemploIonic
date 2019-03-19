@@ -16,6 +16,8 @@ export class ChatPage implements OnInit {
   usuario: UsuarioChat;
   conversacion: Conversacion;
 
+  mensajesSegundoPlano: boolean;
+
   @Input()
   usuariosEscribiendo: UsuarioEscribiendo[];
   @Output()
@@ -44,6 +46,14 @@ export class ChatPage implements OnInit {
       }),
       tap(conversacion => console.log('Chat asociado a conversacion ' + JSON.stringify(conversacion)))
     ).subscribe(conversacion => this.conversacion = conversacion);
+    // --- mensajes en segundo plano de chat no se mostraran con opacidad
+    this.mensajesSegundoPlano = false;
+  }
+  /**
+   * agrega opacidad a mensajes de chat cuando se abre la lista de botones fab con acciones de chat.
+  */
+  toogleFabAcciones() {
+    this.mensajesSegundoPlano = !this.mensajesSegundoPlano;
   }
 
 }

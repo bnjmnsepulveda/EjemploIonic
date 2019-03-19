@@ -19,10 +19,12 @@
     <ng-template [ngIf]="conversacion.mensajes" >
         <app-mensaje *ngFor="let m of conversacion.mensajes"
         [usuario]="usuario"
-        [mensaje]="m"></app-mensaje>
+        [mensaje]="m"
+        [style.opacity]="mensajesSegundoPlano? 0.4 : 1"
+        ></app-mensaje>
     </ng-template>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
-      <ion-fab-button>
+      <ion-fab-button (click)="toogleFabAcciones()">
         <ion-icon name="paper-plane"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="top">
@@ -46,4 +48,5 @@
   .contenido-mensajes {
     background-image: url("/assets/images/fondo_chat.jpg");
   }
+
 </style>
