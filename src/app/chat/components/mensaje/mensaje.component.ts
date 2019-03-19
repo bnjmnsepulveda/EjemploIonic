@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UsuarioChat, MensajeChat } from '../../../domain/cckall.domain';
+import { UsuarioChat, MensajeChat } from '../../../shared/domain/cckall.domain';
 
 @Component({
   selector: 'app-mensaje',

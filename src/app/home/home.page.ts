@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
   usuario: ContactoAgente;
   contactos: ContactoAgente[];
   conversaciones: Conversacion[];
+  conversaciones$: Observable<Conversacion[]>;
   conectado: boolean;
   videollamadaEnProceso: boolean;
   saliente: boolean;
@@ -85,7 +86,8 @@ export class HomePage implements OnInit {
   }
 
   async onSeleccionarContacto(contacto: ContactoAgente) {
-    const btnChat = {
+    this.onChatContacto(contacto);
+    /*const btnChat = {
       text: 'Chat',
       role: 'accept',
       handler: () => {
@@ -104,7 +106,7 @@ export class HomePage implements OnInit {
       message: 'Comunicarse con ' + contacto.nombre,
       buttons: contacto.enLinea ? [ btnVideollamada, btnChat ] : [ btnChat ]
     });
-    await alert.present();
+    await alert.present();*/
   }
 
   async onSeleccionarConversacion(conversacion: Conversacion) {
@@ -153,7 +155,36 @@ export class HomePage implements OnInit {
 
   onChatContacto(contacto: ContactoAgente) {
     console.log('Chat con ' + JSON.stringify(contacto));
-    this.router.navigate(['chat', contacto.id]);
+    const emisor = this.usuario.usuarioChat;
+    const receptor = contacto.usuarioChat;
+    const subscripcionConversacion = this.conversacionService.readByParticipantes([emisor, receptor])
+    .subscribe(
+      conversacion => {
+        if (conversacion) {
+          // this.router.navigate(['home/chat/conversacion', conversacion.id]);
+          this.router.navigate(['chat', conversacion.id]);
+        } else {
+          console.log('se creara conversacion nueva...');
+          const conversacionNueva: Conversacion = {
+            titulo: `Chat ${emisor.username} - ${receptor.username}`,
+            descripcion: `Conversación privada entre ${emisor.username} y ${receptor.username}`,
+            participantes: [emisor, receptor]
+          };
+          this.conversacionService.create(conversacionNueva)
+          .pipe(
+            switchMap(conversacionCreada => {
+              // this.router.navigate(['home/chat/conversacion', conversacionCreada.id]);
+              this.router.navigate(['chat', conversacionCreada.id]);
+              return this.conversaciones$;
+            })
+          ).subscribe( conversacionesActualizadas => {
+            this.conversaciones = conversacionesActualizadas;
+          });
+        }
+        subscripcionConversacion.unsubscribe();
+    });
+
+//    this.router.navigate(['chat', contacto.id]);
   }
 
   onVideollamadaContacto(contacto: ContactoAgente) {

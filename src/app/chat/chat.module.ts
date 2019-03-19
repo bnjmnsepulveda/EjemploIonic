@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ChatPage } from './chat.page';
 import { BarraMensajeComponent } from './components/barra-mensaje/barra-mensaje.component';
+import { MensajeComponent } from './components/mensaje/mensaje.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ChatPage, BarraMensajeComponent]
+  declarations: [ChatPage, BarraMensajeComponent, MensajeComponent]
 })
 export class ChatPageModule {}
