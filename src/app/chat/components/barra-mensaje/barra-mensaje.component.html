@@ -1,66 +1,19 @@
 <style>
-    .contenedor-barra-mensajes {
-      background-color: #e9f0f3;
-      padding: 10px;
-    }
-    .contenedor-barra-mensajes div {
-      display: inline-block;
-    }
-    .contenedor-btn{
-      width: 120px;
-      position: absolute;
-      right: 0;
-      top: 30px;
-    }
-    .btn-chat {
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 25px;
-    }
-    .btn-chat img {
-      width: 17px;
-      height: 17px;
-    }
-    .btn-chat:hover {
-      background-color: rgba(0,0,0,0.2);
-    }
-    .input-chat{
-      width: 100%;
-      background-color: unset;
-      border: unset;
-      border-bottom: 1.5px solid #cccccc;
-      padding-bottom: 10px;
-    }
-  </style>
-  <div class="contenedor-barra-mensajes">
-    <!--<div style="width: calc(100% - 120px)">-->
-        <ion-item [style.width.%]="80" >
-          <ion-input 
-            type="text" 
-            [(ngModel)]="textoMensaje" 
-            (keyup)="onEscribiendo()"
-            (keydown)="onKeyDown($event)"
-            placeholder="Enviar mensaje..."
-           ></ion-input>
-        </ion-item>
-        <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
-            <ion-fab-button (click)="onEnviarMensaje()" >
-              <ion-icon name="send"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>-->
-    <!---/div>-->
-    <!--
-    <div class="contenedor-btn">
-      <div (click)="onEnviarMensaje()" class="btn-chat" title="Enviar mensaje" >
-        <img [src]="textoMensaje.length === 0? '/assets/images/enviar-chat-disabled.svg':'/assets/img/enviar-chat.svg'" />
-      </div>
-      <div (click)="onAdjuntar()" class="btn-chat" title="Adjuntar archivo" >
-        <img src="/assets/images/adjuntar-archivo.svg" />
-      </div>
-      <div (click)="onPregrabados()" class="btn-chat" title="Frase pregrabada" >
-        <img src="/assets/images/lista-frases-pregrabadas.svg" />
-      </div>
-    </div>
-  -->
-  </div>
-  
+  .contenedor-barra-mensajes {
+    background-color: #e9f0f3;
+    padding: 10px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+  }
+</style>
+<div class="contenedor-barra-mensajes">
+  <ion-item [style.width.%]="80">
+    <ion-input
+      type="text"
+      [(ngModel)]="textoMensaje"
+      (keyup)="onEscribiendo()"
+      (keydown)="onKeyDown($event)"
+      placeholder="Enviar mensaje..."
+    ></ion-input>
+  </ion-item>
+</div>
