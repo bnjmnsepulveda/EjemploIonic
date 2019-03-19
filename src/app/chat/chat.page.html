@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>chat</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="primary">
+      <ion-button color="light">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nombre - CHAT</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content padding class="contenido-mensajes">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" edge="true">
+    <ion-fab-button>
+      <ion-icon name="paper-plane"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+<ion-footer>
+  <app-barra-mensaje></app-barra-mensaje>
+</ion-footer>
+
+<style>
+.contenido-mensajes{
+    background-image: url("/assets/images/fondo_chat.jpg");
+}
+</style>

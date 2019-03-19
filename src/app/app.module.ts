@@ -1,3 +1,4 @@
+import { ChatPageModule } from './chat/chat.module';
  
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,13 +31,14 @@ import { AuthInterceptor } from './shared/services/auth-interceptor.service';
         AppRoutingModule,
         HttpClientModule,
         VideoRoomPageModule,
-        ContactosModule
+        ContactosModule,
+        ChatPageModule
     ],
     providers: [
         StatusBar,
         SplashScreen,
         {
-            provide: RouteReuseStrategy, useClass: IonicRouteStrategy 
+            provide: RouteReuseStrategy, useClass: IonicRouteStrategy
         },
         {
             provide: HTTP_INTERCEPTORS,

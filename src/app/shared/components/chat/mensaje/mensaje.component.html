@@ -1,0 +1,62 @@
+<div class="contenedor-mensaje {{cssMensaje}}">
+    <img src="/assets/img/agente.svg" width="50" class="avatar-mensaje" />
+    <div class="globo-mensaje">
+      <p class="nombre-usuario">{{ mensaje.emisor.username }}</p>
+      <span class="contenido-mensaje">{{ mensaje.contenido }}</span>
+      <p class="fecha-envio">Enviado: {{ mensaje.fecha | date: "HH:mm - MM/dd/yyyy" }}</p>
+    </div>
+  </div>
+  <style>
+    .contenedor-mensaje {
+      width: 100%;
+      padding: 5px;
+    }
+  
+    .avatar-mensaje{
+      margin: 10px;
+    }
+  
+    .globo-mensaje {
+      background-color: #dae4ee;
+      width: calc(100% - 90px);
+      display: inline-block;
+      padding: 10px;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+  
+    .contenido-mensaje{
+      font-size: 12px;
+    }
+  
+    .fecha-envio {
+      font-size: 11px;
+      text-align: end;
+      color: grey;
+    }
+    .globo-mensaje .nombre-usuario {
+      font-weight: bold;
+      color:blueviolet;
+      font-size: 14px;
+    }
+  
+    .usuario .avatar-mensaje {
+      float: right;
+    }
+  
+    .usuario .globo-mensaje{
+      border-top-right-radius: 0px;
+      background-color: #ffffff;
+    }
+  
+    .contraparte .avatar-mensaje {
+      float: left;
+    }
+  
+    .contraparte .globo-mensaje{
+      border-top-left-radius: 0px;
+      width: calc(100% - 80px);
+    }
+  
+  </style>
+  

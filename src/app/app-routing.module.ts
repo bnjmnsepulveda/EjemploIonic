@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'peticion_videollamada/:tipo',
   loadChildren: './peticion-videollamada/peticion-videollamada.module#PeticionVideollamadaPageModule' },
-  { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' }
+  { path: 'chat/:conversacionId', loadChildren: './chat/chat.module#ChatPageModule' }
 ];
 
 @NgModule({

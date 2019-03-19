@@ -153,6 +153,7 @@ export class HomePage implements OnInit {
 
   onChatContacto(contacto: ContactoAgente) {
     console.log('Chat con ' + JSON.stringify(contacto));
+    this.router.navigate(['chat', contacto.id]);
   }
 
   onVideollamadaContacto(contacto: ContactoAgente) {
