@@ -11,9 +11,8 @@ export class BarraMensajeComponent implements OnInit {
 
   // --- modelo de app ---
   textoMensaje: string;
-  // --- propiedades para logica de envio de evento escribiendo ---
-  contadorEscribiendo = 0;
-  emitirEventoEscribiendo = false;
+  @Output()
+  toggleFabList = new EventEmitter();
   @Output()
   enviarMensaje = new EventEmitter<string>();
   @Output()
@@ -40,6 +39,10 @@ export class BarraMensajeComponent implements OnInit {
         this.finEscribiendo.emit(val);
         this.subscripcionInicioEscribiendo();
       });
+  }
+
+  onToggleFabList() {
+    this.toggleFabList.emit();
   }
 
   onEnviarMensaje() {

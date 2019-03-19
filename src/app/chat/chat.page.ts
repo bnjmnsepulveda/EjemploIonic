@@ -52,12 +52,21 @@ export class ChatPage implements OnInit {
   /**
    * agrega opacidad a mensajes de chat cuando se abre la lista de botones fab con acciones de chat.
   */
-  toogleFabAcciones() {
+  onToogleFabList() {
+    console.log('SE ABRIO BTON LIST FAB');
     this.mensajesSegundoPlano = !this.mensajesSegundoPlano;
   }
 
-  onEnviarMensaje(): void {
-   // console.log(texto);
+  onEnviarMensaje(text: string): void {
+    console.log('XD MENSAJE A ENVIAR=' + text);
+  }
+
+  onInicioEscribiendo(text: string) {
+    console.log('INICIO ESCR=' + text);
+  }
+
+  onFinEscribiendo(text: string) {
+    console.log('FIN ESCR=' + text);
   }
 
 }
