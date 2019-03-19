@@ -12,15 +12,14 @@
 
 #dashboard-content {
     --background: none;
-    background-image: url('/assets/images/dashboard-bg.jpg') !important;
     background-size: cover;
-    color: #ffffff;
+    background-color: var(--cckall-background-color);
     text-align: center;
 }
 
 
 .item-has-focus .label-floating.sc-ion-label-md-h{
-    color: #b7ffc9;
+    color: var(--cckall-secundary-color);
 }
 
 #card{
@@ -37,7 +36,7 @@
 
 #form{
     padding: 20px;
-    background-color: #00000096;
+    background-color: #ffffff;
     border: 1px;
     border-radius: 12px;
 }

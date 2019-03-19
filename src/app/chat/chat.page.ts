@@ -56,4 +56,8 @@ export class ChatPage implements OnInit {
     this.mensajesSegundoPlano = !this.mensajesSegundoPlano;
   }
 
+  onEnviarMensaje(): void {
+   // console.log(texto);
+  }
+
 }
